@@ -1,0 +1,78 @@
+// routes/payment.js
+const express = require('express');
+const router = express.Router();
+const Razorpay = require('razorpay');
+
+// Initialize Razorpay
+const razorpay = new Razorpay({
+  key_id: process.env.RAZORPAY_KEY_ID,
+  key_secret: process.env.RAZORPAY_KEY_SECRET
+});
+
+// POST /api/payment/create-order - Create a Razorpay order
+router.post('/create-order', async (req, res) => {
+  try {
+    const { amount, currency = 'INR', receipt } = req.body;
+    
+    const options = {
+      amount: amount * 100, // Razorpay expects amount in paise
+      currency,
+      receipt: receipt || `receipt_${Date.now()}`
+    };
+    
+    const order = await razorpay.orders.create(options);
+    
+    res.json({
+      id: order.id,
+      amount: order.amount,
+      currency: order.currency
+    });
+  } catch (error) {
+    console.error('Razorpay error:', error);
+    res.status(500).json({ 
+      message: 'Error creating payment order',
+      error: error.error?.description || error.message 
+    });
+  }
+});
+
+// POST /api/payment/verify - Verify payment signature
+router.post('/verify', async (req, res) => {
+  try {
+    const { order_id, payment_id, signature } = req.body;
+    
+    // Create expected signature
+    const crypto = require('crypto');
+    const expectedSignature = crypto
+      .createHmac('sha256', process.env.RAZORPAY_KEY_SECRET)
+      .update(order_id + '|' + payment_id)
+      .digest('hex');
+    
+    // Verify signature
+    if (expectedSignature === signature) {
+      // Signature is valid, payment successful
+      // Save payment details to your database
+      
+      res.json({ 
+        success: true, 
+        message: 'Payment verified successfully' 
+      });
+    } else {
+      // Signature is invalid
+      res.status(400).json({ 
+        success: false, 
+        message: 'Payment verification failed' 
+      });
+    }
+  } catch (error) {
+    console.error('Payment verification error:', error);
+    res.status(500).json({ 
+      success: false,
+      message: 'Error verifying payment',
+      error: error.message 
+    });
+  }
+});
+
+module.exports = router;
+                    

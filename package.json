@@ -1,0 +1,31 @@
+{
+  "name": "kandk",
+  "version": "1.0.0",
+  "description": "Living Heritage - A platform for exploring cultural experiences",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "axios": "^1.5.0",
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.6.1",
+    "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^7.8.7"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  },
+  "keywords": [
+    "heritage",
+    "culture",
+    "tourism",
+    "experiences"
+  ],
+  "author": "Your Name",
+  "license": "ISC"
+}

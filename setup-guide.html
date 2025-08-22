@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Living Heritage Setup Guide</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #2980b9;
+        }
+        code {
+            background-color: #f8f9fa;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Consolas', monospace;
+        }
+        pre {
+            background-color: #2d2d2d;
+            color: #f8f9fa;
+            padding: 15px;
+            border-radius: 6px;
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+        .step {
+            background-color: #e8f4fc;
+            padding: 15px;
+            border-left: 4px solid #3498db;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .warning {
+            background-color: #fdecea;
+            padding: 15px;
+            border-left: 4px solid #e74c3c;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .success {
+            background-color: #e8f6f3;
+            padding: 15px;
+            border-left: 4px solid #2ecc71;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .terminal {
+            background-color: #2d2d2d;
+            color: #fff;
+            padding: 15px;
+            border-radius: 6px;
+            font-family: 'Consolas', monospace;
+            margin: 15px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Living Heritage Project Setup Guide</h1>
+        
+        <div class="warning">
+            <h2>JSON Parse Error Resolution</h2>
+            <p>If you're getting a JSON parse error when running <code>npm init -y</code>, follow these steps:</p>
+        </div>
+        
+        <div class="step">
+            <h2>Step 1: Clear npm Cache</h2>
+            <p>Open your terminal in VS Code and run:</p>
+            <div class="terminal">npm cache clean --force</div>
+        </div>
+        
+        <div class="step">
+            <h2>Step 2: Verify npm Configuration</h2>
+            <p>Check your npm configuration with:</p>
+            <div class="terminal">npm config list</div>
+            <p>Look for any invalid JSON configurations.</p>
+        </div>
+        
+        <div class="step">
+            <h2>Step 3: Initialize npm Properly</h2>
+            <p>Try initializing with a scope or different approach:</p>
+            <div class="terminal">
+                npm init -y --scope=yourusername
+            </div>
+            <p>Or manually create a package.json file:</p>
+            <pre>{
+  "name": "living-heritage",
+  "version": "1.0.0",
+  "description": "A platform for exploring and selling cultural experiences",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "keywords": ["heritage", "culture", "tourism"],
+  "author": "Your Name",
+  "license": "MIT"
+}</pre>
+        </div>
+        
+        <div class="step">
+            <h2>Step 4: Install Dependencies</h2>
+            <p>After creating package.json, install required dependencies:</p>
+            <div class="terminal">
+                npm install express mongoose bcryptjs jsonwebtoken cors dotenv
+            </div>
+            <p>Install development dependencies:</p>
+            <div class="terminal">
+                npm install -D nodemon
+            </div>
+        </div>
+        
+        <div class="step">
+            <h2>Step 5: Create Environment File</h2>
+            <p>Create a <code>.env</code> file in your root directory:</p>
+            <pre>MONGODB_URI=mongodb://localhost:27017/living-heritage
+JWT_SECRET=your_super_secret_jwt_key_here
+PORT=5000</pre>
+        </div>
+        
+        <div class="step">
+            <h2>Step 6: Set Up Your Main App File</h2>
+            <p>Create <code>app.js</code> with the following content:</p>
+            <pre>const express = require('express');
+const mongoose = require('mongoose');
+const cors = require('cors');
+require('dotenv').config();
+
+// Import routes
+const authRoutes = require('./routes/auth');
+const explorerRoutes = require('./routes/explorer');
+const merchantRoutes = require('./routes/merchant');
+
+const app = express();
+
+// Middleware
+app.use(cors());
+app.use(express.json());
+app.use(express.static('public'));
+
+// Routes
+app.use('/api/auth', authRoutes);
+app.use('/api', explorerRoutes);
+app.use('/api', merchantRoutes);
+
+// Database connection
+mongoose.connect(process.env.MONGODB_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
+.then(() => console.log('MongoDB connected successfully'))
+.catch(err => console.log('MongoDB connection error:', err));
+
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});</pre>
+        </div>
+        
+        <div class="success">
+            <h2>Final Step: Run Your Application</h2>
+            <p>Start your development server with:</p>
+            <div class="terminal">npm run dev</div>
+            <p>If everything is set up correctly, you should see:</p>
+            <div class="terminal">Server is running on port 5000<br>MongoDB connected successfully</div>
+        </div>
+        
+        <div class="warning">
+            <h2>Troubleshooting</h2>
+            <p>If you're still having issues:</p>
+            <ul>
+                <li>Make sure you have Node.js and npm installed correctly</li>
+                <li>Check your internet connection</li>
+                <li>Try updating npm: <code>npm install -g npm@latest</code></li>
+                <li>Verify there are no syntax errors in any existing package.json file</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

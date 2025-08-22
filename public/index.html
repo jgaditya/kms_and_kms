@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Living Heritage - Cultural Experiences Platform</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary: #4a6b54;
+            --secondary: #d8a353;
+            --accent: #9c6f44;
+            --light: #f8f5f0;
+            --dark: #2c3e33;
+            --text: #333333;
+            --text-light: #777777;
+            --shadow: 0 4px 12px rgba(0,0,0,0.08);
+            --radius: 8px;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--text);
+            background-color: #faf9f7;
+            line-height: 1.6;
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            color: var(--dark);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: white;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo span {
+            color: var(--secondary);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+        
+        nav a:hover {
+            color: var(--primary);
+        }
+        
+        nav a.active {
+            color: var(--primary);
+        }
+        
+        nav a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--primary);
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(44, 62, 51, 0.7), rgba(44, 62, 51, 0.7)), 
+                        url('https://images.unsplash.com/photo-1501555088652-021faa106b9b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1500&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            color: white;
+        }
+        
+        .hero p {
+            font-size: 20px;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--secondary);
+            color: white;
+            padding: 12px 28px;
+            border-radius: var(--radius);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background-color: var(--accent);
+            transform: translateY(-2px);
+        }
+        
+        /* Section Styles */
+        section {
+            padding: 60px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background-color: var(--secondary);
+            margin: 15px auto 0;
+        }
+        
+        /* Tab Navigation */
+        .tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 40px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .tab-btn {
+            padding: 12px 24px;
+            background: none;
+            border: none;
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--text-light);
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+        }
+        
+        .tab-btn.active {
+            color: var(--primary);
+        }
+        
+        .tab-btn.active::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: var(--primary);
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        /* Card Styles */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .card {
+            background-color: white;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .card-img {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .card-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .card:hover .card-img img {
+            transform: scale(1.05);
+        }
+        
+        .card-content {
+            padding: 20px;
+        }
+        
+        .card h3 {
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+        
+        .card p {
+            color: var(--text-light);
+            margin-bottom: 15px;
+        }
+        
+        .card-price {
+            font-weight: 600;
+            color: var(--primary);
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+        
+        /* Weather Widget */
+        .weather-widget {
+            background-color: white;
+            border-radius: var(--radius);
+            padding: 25px;
+            box-shadow: var(--shadow);
+            margin-bottom: 40px;
+        }
+        
+        .weather-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .weather-search {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .weather-search input {
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: var(--radius);
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .current-weather {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            margin-bottom: 30px;
+        }
+        
+        .temp {
+            font-size: 48px;
+            font-weight: 600;
+        }
+        
+        .weather-desc {
+            text-align: center;
+            text-transform: capitalize;
+        }
+        
+        .weather-icon {
+            font-size: 50px;
+            text-align: center;
+        }
+        
+        .weather-details {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+        
+        .detail-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 60px 0 30px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 20px;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column a:hover {
+            color: var(--secondary);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #aaa;
+            font-size: 14px;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            nav ul {
+                gap: 15px;
+            }
+            
+            .hero h1 {
+                font-size: 36px;
+            }
+            
+            .hero p {
+                font-size: 18px;
+            }
+            
+            .current-weather {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .weather-search {
+                flex-direction: column;
+            }
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: var(--text-light);
+        }
+        
+        .error {
+            text-align: center;
+            padding: 40px;
+            color: #e74c3c;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="#" class="logo">Living<span>Heritage</span></a>
+                <nav>
+                    <ul>
+                        <li><a href="#" class="active" data-tab="home">Home</a></li>
+                        <li><a href="#" data-tab="explorer">Experiences</a></li>
+                        <li><a href="#" data-tab="merchant">Marketplace</a></li>
+                        <li><a href="#" data-tab="weather">Weather</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Discover Cultural Treasures</h1>
+            <p>Explore authentic cultural experiences and handcrafted products from local communities around the world.</p>
+            <a href="#" class="btn" data-tab="explorer">Start Exploring</a>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Tab Navigation -->
+        <div class="tabs">
+            <button class="tab-btn active" data-tab="explorer">Cultural Experiences</button>
+            <button class="tab-btn" data-tab="merchant">Artisan Products</button>
+            <button class="tab-btn" data-tab="weather">Weather Forecast</button>
+        </div>
+
+        <!-- Explorer Tab Content -->
+        <div class="tab-content active" id="explorer-tab">
+            <div class="section-title">
+                <h2>Cultural Experiences</h2>
+                <p>Immerse yourself in authentic cultural activities and workshops</p>
+            </div>
+            
+            <div class="card-grid" id="experiences-container">
+                <div class="loading">Loading experiences...</div>
+            </div>
+        </div>
+
+        <!-- Merchant Tab Content -->
+        <div class="tab-content" id="merchant-tab">
+            <div class="section-title">
+                <h2>Artisan Marketplace</h2>
+                <p>Discover handcrafted products made by skilled artisans</p>
+            </div>
+            
+            <div class="card-grid" id="products-container">
+                <div class="loading">Loading products...</div>
+            </div>
+            
+            <div style="margin-top: 40px;">
+                <div class="section-title">
+                    <h2>Order History</h2>
+                    <p>Track your recent purchases</p>
+                </div>
+                
+                <div class="card-grid" id="orders-container">
+                    <div class="loading">Loading orders...</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Weather Tab Content -->
+        <div class="tab-content" id="weather-tab">
+            <div class="section-title">
+                <h2>Weather Forecast</h2>
+                <p>Check the weather for your cultural adventures</p>
+            </div>
+            
+            <div class="weather-widget">
+                <div class="weather-header">
+                    <h3>Current Weather</h3>
+                    <div class="weather-search">
+                        <input type="text" id="city-input" placeholder="Enter city name">
+                        <button class="btn" id="search-weather">Search</button>
+                    </div>
+                </div>
+                
+                <div id="current-weather-container">
+                    <div class="loading">Enter a city to see weather information</div>
+                </div>
+            </div>
+            
+            <div class="weather-widget">
+                <div class="weather-header">
+                    <h3>5-Day Forecast</h3>
+                </div>
+                
+                <div id="forecast-container">
+                    <div class="loading">Enter a city to see forecast</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Living Heritage</h3>
+                    <p>Connecting travelers with authentic cultural experiences and artisans worldwide.</p>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#" data-tab="explorer">Cultural Experiences</a></li>
+                        <li><a href="#" data-tab="merchant">Artisan Products</a></li>
+                        <li><a href="#" data-tab="weather">Weather Forecast</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <ul>
+                        <li>Email: info@livingheritage.com</li>
+                        <li>Phone: +1 (555) 123-4567</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                &copy; 2023 Living Heritage. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Tab navigation
+            const tabBtns = document.querySelectorAll('.tab-btn');
+            const tabContents = document.querySelectorAll('.tab-content');
+            const navLinks = document.querySelectorAll('nav a');
+            
+            // Function to switch tabs
+            function switchTab(tabName) {
+                // Update tab buttons
+                tabBtns.forEach(btn => {
+                    if (btn.dataset.tab === tabName) {
+                        btn.classList.add('active');
+                    } else {
+                        btn.classList.remove('active');
+                    }
+                });
+                
+                // Update tab contents
+                tabContents.forEach(content => {
+                    if (content.id === `${tabName}-tab`) {
+                        content.classList.add('active');
+                    } else {
+                        content.classList.remove('active');
+                    }
+                });
+                
+                // Update nav links
+                navLinks.forEach(link => {
+                    if (link.dataset.tab === tabName) {
+                        link.classList.add('active');
+                    } else {
+                        link.classList.remove('active');
+                    }
+                });
+                
+                // Load data if needed
+                if (tabName === 'explorer') {
+                    loadExperiences();
+                } else if (tabName === 'merchant') {
+                    loadProducts();
+                    loadOrders();
+                } else if (tabName === 'weather') {
+                    // Default weather location
+                    getWeatherByCity('Paris');
+                }
+            }
+            
+            // Add event listeners to tab buttons
+            tabBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    switchTab(btn.dataset.tab);
+                });
+            });
+            
+            // Add event listeners to nav links
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    switchTab(link.dataset.tab);
+                    
+                    // Scroll to content
+                    document.querySelector('.tabs').scrollIntoView({ behavior: 'smooth' });
+                });
+            });
+            
+            // Weather search functionality
+            document.getElementById('search-weather').addEventListener('click', () => {
+                const city = document.getElementById('city-input').value;
+                if (city) {
+                    getWeatherByCity(city);
+                }
+            });
+            
+            // Load initial data
+            loadExperiences();
+            
+            // API Functions
+            async function loadExperiences() {
+                const container = document.getElementById('experiences-container');
+                container.innerHTML = '<div class="loading">Loading experiences...</div>';
+                
+                try {
+                    const response = await fetch('/api/explorer/experiences');
+                    const experiences = await response.json();
+                    
+                    if (experiences.length > 0) {
+                        container.innerHTML = '';
+                        experiences.forEach(exp => {
+                            const card = createExperienceCard(exp);
+                            container.appendChild(card);
+                        });
+                    } else {
+                        container.innerHTML = '<div class="error">No experiences found</div>';
+                    }
+                } catch (error) {
+                    console.error('Error loading experiences:', error);
+                    container.innerHTML = '<div class="error">Failed to load experiences</div>';
+                }
+            }
+            
+            function createExperienceCard(experience) {
+                const card = document.createElement('div');
+                card.className = 'card';
+                
+                // Using placeholder images based on experience type
+                const imageUrl = experience.title.includes('Pottery') 
+                    ? 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+                    : 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80';
+                
+                card.innerHTML = `
+                    <div class="card-img">
+                        <img src="${imageUrl}" alt="${experience.title}">
+                    </div>
+                    <div class="card-content">
+                        <h3>${experience.title}</h3>
+                        <p>${experience.description}</p>
+                        <div class="card-price">$${experience.price} per person</div>
+                        <button class="btn">Book Now</button>
+                    </div>
+                `;
+                
+                return card;
+            }
+            
+            async function loadProducts() {
+                const container = document.getElementById('products-container');
+                container.innerHTML = '<div class="loading">Loading products...</div>';
+                
+                try {
+                    const response = await fetch('/api/merchant/products');
+                    const data = await response.json();
+                    
+                    if (data.success && data.products.length > 0) {
+                        container.innerHTML = '';
+                        data.products.forEach(product => {
+                            const card = createProductCard(product);
+                            container.appendChild(card);
+                        });
+                    } else {
+                        container.innerHTML = '<div class="error">No products found</div>';
+                    }
+                } catch (error) {
+                    console.error('Error loading products:', error);
+                    container.innerHTML = '<div class="error">Failed to load products</div>';
+                }
+            }
+            
+            function createProductCard(product) {
+                const card = document.createElement('div');
+                card.className = 'card';
+                
+                // Using placeholder images based on product category
+                const imageUrl = product.category === 'crafts' 
+                    ? 'https://images.unsplash.com/photo-1577985051164-55a7bf6c2c2a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+                    : 'https://images.unsplash.com/photo-1590661080496-54e229e2b4c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80';
+                
+                card.innerHTML = `
+                    <div class="card-img">
+                        <img src="${imageUrl}" alt="${product.name}">
+                    </div>
+                    <div class="card-content">
+                        <h3>${product.name}</h3>
+                        <p>Handcrafted ${product.category}</p>
+                        <div class="card-price">$${product.price}</div>
+                        <button class="btn">Add to Cart</button>
+                    </div>
+                `;
+                
+                return card;
+            }
+            
+            async function loadOrders() {
+                const container = document.getElementById('orders-container');
+                container.innerHTML = '<div class="loading">Loading orders...</div>';
+                
+                try {
+                    const response = await fetch('/api/merchant/orders');
+                    const data = await response.json();
+                    
+                    if (data.success && data.orders.length > 0) {
+                        container.innerHTML = '';
+                        data.orders.forEach(order => {
+                            const card = createOrderCard(order);
+                            container.appendChild(card);
+                        });
+                    } else {
+                        container.innerHTML = '<div class="error">No orders found</div>';
+                    }
+                } catch (error) {
+                    console.error('Error loading orders:', error);
+                    container.innerHTML = '<div class="error">Failed to load orders</div>';
+                }
+            }
+            
+            function createOrderCard(order) {
+                const card = document.createElement('div');
+                card.className = 'card';
+                
+                card.innerHTML = `
+                    <div class="card-content">
+                        <h3>Order #${order.id}</h3>
+                        <p>Product: ${order.product}</p>
+                        <p>Status: <span style="color: ${order.status === 'completed' ? '#4caf50' : '#ff9800'}">${order.status}</span></p>
+                        <button class="btn">View Details</button>
+                    </div>
+                `;
+                
+                return card;
+            }
+            
+            async function getWeatherByCity(city) {
+                const currentContainer = document.getElementById('current-weather-container');
+                const forecastContainer = document.getElementById('forecast-container');
+                
+                currentContainer.innerHTML = '<div class="loading">Loading current weather...</div>';
+                forecastContainer.innerHTML = '<div class="loading">Loading forecast...</div>';
+                
+                try {
+                    // Get current weather
+                    const currentResponse = await fetch(`/api/weather/current?city=${encodeURIComponent(city)}`);
+                    const currentData = await currentResponse.json();
+                    
+                    if (currentResponse.ok) {
+                        currentContainer.innerHTML = createCurrentWeatherHTML(currentData);
+                    } else {
+                        currentContainer.innerHTML = `<div class="error">${currentData.message}</div>`;
+                    }
+                    
+                    // Get forecast
+                    const forecastResponse = await fetch(`/api/weather/forecast?city=${encodeURIComponent(city)}&days=5`);
+                    const forecastData = await forecastResponse.json();
+                    
+                    if (forecastResponse.ok) {
+                        forecastContainer.innerHTML = createForecastHTML(forecastData);
+                    } else {
+                        forecastContainer.innerHTML = `<div class="error">${forecastData.message}</div>`;
+                    }
+                } catch (error) {
+                    console.error('Error loading weather:', error);
+                    currentContainer.innerHTML = '<div class="error">Failed to load weather data</div>';
+                    forecastContainer.innerHTML = '<div class="error">Failed to load forecast</div>';
+                }
+            }
+            
+            function createCurrentWeatherHTML(data) {
+                return `
+                    <div class="current-weather">
+                        <div>
+                            <div class="temp">${Math.round(data.temperature)}°C</div>
+                            <div class="weather-desc">${data.description}</div>
+                        </div>
+                        <div class="weather-icon">☀️</div>
+                        <div>
+                            <div>Feels like: ${Math.round(data.feelsLike)}°C</div>
+                            <div>Humidity: ${data.humidity}%</div>
+                            <div>Wind: ${data.windSpeed} m/s</div>
+                        </div>
+                    </div>
+                    <div class="location">${data.city}, ${data.country}</div>
+                `;
+            }
+            
+            function createForecastHTML(forecastData) {
+                if (!forecastData || forecastData.length === 0) {
+                    return '<div class="error">No forecast data available</div>';
+                }
+                
+                let html = '<div class="weather-details">';
+                
+                forecastData.forEach(day => {
+                    html += `
+                        <div class="detail-item">
+                            <div>${new Date(day.date).toLocaleDateString()}</div>
+                            <div>${Math.round(day.temperature)}°C</div>
+                            <div>${day.description}</div>
+                        </div>
+                    `;
+                });
+                
+                html += '</div>';
+                return html;
+            }
+        });
+    </script>
+</body>
+</html>
