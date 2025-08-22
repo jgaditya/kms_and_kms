@@ -1,7 +1,136 @@
-<section class="hero">
-    <div class="container">
-        <h1>EXPLORE KERALA'S RICH CULTURE</h1>
-        <p>EXPERIENCE GOD' OWN COUNTRY'S EXQUISITE HERITAGE. KATHAKALI, MOHINIYATTAM, GENERATIONAL ARTFORMS.</p>
-        <a href="#" class="btn" data-tab="explorer">EXPLORE</a>
-    </div>
-</section>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kerala Heritage - Cultural Experiences Platform</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* Your existing CSS styles remain the same */
+        
+        /* Hero Section - Modified for random images */
+        .hero {
+            position: relative;
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+            margin-bottom: 60px;
+            overflow: hidden;
+        }
+        
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            transition: opacity 1s ease-in-out;
+            opacity: 0;
+            z-index: 1;
+        }
+        
+        .hero-bg.active {
+            opacity: 1;
+        }
+        
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(rgba(10, 92, 54, 0.7), rgba(10, 92, 54, 0.7));
+            z-index: 2;
+            pointer-events: none;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 3;
+        }
+        
+        /* Rest of your CSS remains unchanged */
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Malayalam:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Kathakali Mask Decorations -->
+    <div class="kathakali-mask mask-1"></div>
+    <div class="kathakali-mask mask-2"></div>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="#" class="logo">കേരള<span>Heritage</span></a>
+                <nav>
+                    <ul>
+                        <li><a href="#" class="active" data-tab="home">HOME</a></li>
+                        <li><a href="#" data-tab="explorer">EXPLORER</a></li>
+                        <li><a href="#" data-tab="merchant">MARKETPLACE</a></li>
+                        <li><a href="#" data-tab="weather">WEATHER</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section with Random Background Images -->
+    <section class="hero">
+        <!-- Background images will be inserted here by JavaScript -->
+        <div class="container">
+            <div class="hero-content">
+                <h1>EXPLORE KERALA'S RICH CULTURE</h1>
+                <p>EXPERIENCE GOD' OWN COUNTRY'S EXQUISITE HERITAGE. KATHAKALI, MOHINIYATTAM, GENERATIONAL ARTFORMS.</p>
+                <a href="#" class="btn" data-tab="explorer">EXPLORE</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Rest of your HTML content remains the same -->
+
+    <script>
+        // Array of Kerala background image URLs
+        const keralaBackgrounds = [
+            'https://images.unsplash.com/photo-1588416499018-d8c621b1b3cf?ixlib=rb-4.0.3&auto=format&fit=crop&w=1500&q=80',
+            'https://images.unsplash.com/photo-1585937421610-8da9a6c6d3e7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1500&q=80',
+            'https://images.unsplash.com/photo-1611655336715-5ce4f5a5b1be?ixlib=rb-4.0.3&auto=format&fit=crop&w=1500&q=80',
+            'https://images.unsplash.com/photo-1571896349842-33c89424de2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1500&q=80',
+            'https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?ixlib=rb-4.0.3&auto=format&fit=crop&w=1500&q=80'
+        ];
+
+        // Function to set random background
+        function setRandomBackground() {
+            const heroSection = document.querySelector('.hero');
+            
+            // Remove any existing background divs
+            const existingBackgrounds = document.querySelectorAll('.hero-bg');
+            existingBackgrounds.forEach(bg => bg.remove());
+            
+            // Select a random image from the array
+            const randomImageUrl = keralaBackgrounds[Math.floor(Math.random() * keralaBackgrounds.length)];
+            
+            // Create new background div
+            const bgDiv = document.createElement('div');
+            bgDiv.className = 'hero-bg active';
+            bgDiv.style.backgroundImage = `url('${randomImageUrl}')`;
+            
+            // Insert the background at the beginning of the hero section
+            heroSection.insertBefore(bgDiv, heroSection.firstChild);
+        }
+
+        // Set initial random background
+        document.addEventListener('DOMContentLoaded', function() {
+            setRandomBackground();
+            
+            // Change background every 10 seconds (optional)
+            setInterval(setRandomBackground, 10000);
+            
+            // The rest of your existing JavaScript code
+        });
+    </script>
+</body>
+</html>
