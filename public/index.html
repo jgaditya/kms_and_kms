@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Living Heritage - Cultural Experiences Platform</title>
+    <title>Kerala Heritage - Cultural Experiences Platform</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         * {
@@ -13,11 +13,11 @@
         }
         
         :root {
-            --primary: #4a6b54;
-            --secondary: #d8a353;
-            --accent: #9c6f44;
+            --primary: #0a5c36; /* Kerala green */
+            --secondary: #d4af37; /* Gold */
+            --accent: #c44b27; /* Kathakali orange */
             --light: #f8f5f0;
-            --dark: #2c3e33;
+            --dark: #1a3c2b;
             --text: #333333;
             --text-light: #777777;
             --shadow: 0 4px 12px rgba(0,0,0,0.08);
@@ -29,6 +29,7 @@
             color: var(--text);
             background-color: #faf9f7;
             line-height: 1.6;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%23f8f5f0"/><path d="M0,0 L100,100" stroke="%23e8e5e0" stroke-width="1"/></svg>');
         }
         
         h1, h2, h3, h4 {
@@ -50,6 +51,7 @@
             position: sticky;
             top: 0;
             z-index: 100;
+            background-image: linear-gradient(to right, var(--primary), #1a6e46);
         }
         
         .header-content {
@@ -62,7 +64,7 @@
         .logo {
             font-family: 'Playfair Display', serif;
             font-size: 28px;
-            color: var(--primary);
+            color: white;
             text-decoration: none;
             display: flex;
             align-items: center;
@@ -80,18 +82,18 @@
         
         nav a {
             text-decoration: none;
-            color: var(--text);
+            color: white;
             font-weight: 500;
             transition: color 0.3s;
             position: relative;
         }
         
         nav a:hover {
-            color: var(--primary);
+            color: var(--secondary);
         }
         
         nav a.active {
-            color: var(--primary);
+            color: var(--secondary);
         }
         
         nav a.active::after {
@@ -101,25 +103,39 @@
             left: 0;
             width: 100%;
             height: 2px;
-            background-color: var(--primary);
+            background-color: var(--secondary);
         }
         
         /* Hero Section */
         .hero {
-            background: linear-gradient(rgba(44, 62, 51, 0.7), rgba(44, 62, 51, 0.7)), 
-                        url('https://images.unsplash.com/photo-1501555088652-021faa106b9b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1500&q=80');
+            background: linear-gradient(rgba(10, 92, 54, 0.7), rgba(10, 92, 54, 0.7)), 
+                        url('https://images.unsplash.com/photo-1588416499018-d8c621b1b3cf?ixlib=rb-4.0.3&auto=format&fit=crop&w=1500&q=80');
             background-size: cover;
             background-position: center;
             color: white;
             padding: 100px 0;
             text-align: center;
             margin-bottom: 60px;
+            position: relative;
+        }
+        
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100"><path fill="%23d4af37" opacity="0.1" d="M50,0 L100,50 L50,100 L0,50 Z"/></svg>');
+            background-size: 200px;
+            pointer-events: none;
         }
         
         .hero h1 {
             font-size: 48px;
             margin-bottom: 20px;
             color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
         
         .hero p {
@@ -227,6 +243,7 @@
             overflow: hidden;
             box-shadow: var(--shadow);
             transition: transform 0.3s;
+            border-top: 4px solid var(--secondary);
         }
         
         .card:hover {
@@ -256,6 +273,7 @@
         .card h3 {
             margin-bottom: 10px;
             font-size: 20px;
+            color: var(--primary);
         }
         
         .card p {
@@ -270,6 +288,14 @@
             margin-bottom: 15px;
         }
         
+        /* Kerala Pattern */
+        .kerala-pattern {
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60"><path fill="%23d4af37" opacity="0.2" d="M30,0 C13.431,0,0,13.431,0,30 C0,46.569,13.431,60,30,60 C46.569,60,60,46.569,60,30 C60,13.431,46.569,0,30,0 Z M30,50 C18.954,50,10,41.046,10,30 C10,18.954,18.954,10,30,10 C41.046,10,50,18.954,50,30 C50,41.046,41.046,50,30,50 Z"/></svg>');
+            background-size: 100px;
+            padding: 20px;
+            border-radius: var(--radius);
+        }
+        
         /* Weather Widget */
         .weather-widget {
             background-color: white;
@@ -277,6 +303,7 @@
             padding: 25px;
             box-shadow: var(--shadow);
             margin-bottom: 40px;
+            border-top: 4px solid var(--primary);
         }
         
         .weather-header {
@@ -337,6 +364,7 @@
             background-color: var(--dark);
             color: white;
             padding: 60px 0 30px;
+            background-image: linear-gradient(to bottom, var(--dark), #0f291c);
         }
         
         .footer-content {
@@ -418,20 +446,55 @@
             padding: 40px;
             color: #e74c3c;
         }
+        
+        /* Kathakali Mask Decoration */
+        .kathakali-mask {
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            opacity: 0.1;
+            pointer-events: none;
+        }
+        
+        .mask-1 {
+            top: 20px;
+            left: 5%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path fill="%23d4af37" d="M50,10 C70,10 85,30 85,55 C85,80 70,90 50,90 C30,90 15,80 15,55 C15,30 30,10 50,10 Z M40,40 C35,40 30,45 30,50 C30,55 35,60 40,60 C45,60 50,55 50,50 C50,45 45,40 40,40 Z M60,40 C55,40 50,45 50,50 C50,55 55,60 60,60 C65,60 70,55 70,50 C70,45 65,40 60,40 Z"/></svg>');
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
+        
+        .mask-2 {
+            bottom: 20px;
+            right: 5%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path fill="%23c44b27" d="M50,10 C70,10 85,30 85,55 C85,80 70,90 50,90 C30,90 15,80 15,55 C15,30 30,10 50,10 Z M40,40 C35,40 30,45 30,50 C30,55 35,60 40,60 C45,60 50,55 50,50 C50,45 45,40 40,40 Z M60,40 C55,40 50,45 50,50 C50,55 55,60 60,60 C65,60 70,55 70,50 C70,45 65,40 60,40 Z"/></svg>');
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
+        
+        /* Malayalam Text Style */
+        .malayalam-text {
+            font-family: 'Noto Sans Malayalam', 'Poppins', sans-serif;
+        }
     </style>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Malayalam:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- Kathakali Mask Decorations -->
+    <div class="kathakali-mask mask-1"></div>
+    <div class="kathakali-mask mask-2"></div>
+
     <!-- Header -->
     <header>
         <div class="container">
             <div class="header-content">
-                <a href="#" class="logo">Living<span>Heritage</span></a>
+                <a href="#" class="logo">കേരള<span>Heritage</span></a>
                 <nav>
                     <ul>
-                        <li><a href="#" class="active" data-tab="home">Home</a></li>
-                        <li><a href="#" data-tab="explorer">Experiences</a></li>
-                        <li><a href="#" data-tab="merchant">Marketplace</a></li>
-                        <li><a href="#" data-tab="weather">Weather</a></li>
+                        <li><a href="#" class="active" data-tab="home">മുഖപുടം</a></li>
+                        <li><a href="#" data-tab="explorer">അനുഭവങ്ങൾ</a></li>
+                        <li><a href="#" data-tab="merchant">മാർക്കറ്റ്പ്ലേസ്</a></li>
+                        <li><a href="#" data-tab="weather">കാലാവസ്ഥ</a></li>
                     </ul>
                 </nav>
             </div>
@@ -441,9 +504,9 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="container">
-            <h1>Discover Cultural Treasures</h1>
-            <p>Explore authentic cultural experiences and handcrafted products from local communities around the world.</p>
-            <a href="#" class="btn" data-tab="explorer">Start Exploring</a>
+            <h1>കേരളത്തിന്റെ സാംസ്കാരിക സമ്പത്ത് കണ്ടെത്തുക</h1>
+            <p>കേരളത്തിന്റെ സമ്പന്നമായ സാംസ്കാരിക പൈതൃകം അനുഭവിക്കൂ. കഥകളി, മോഹിനിയാട്ടം, പരമ്പരാഗത കലകൾ എന്നിവയുടെ ജീവന്റെ അനുഭവങ്ങൾ.</p>
+            <a href="#" class="btn" data-tab="explorer">അനുഭവങ്ങൾ കണ്ടുപിടിക്കുക</a>
         </div>
     </section>
 
@@ -451,16 +514,16 @@
     <div class="container">
         <!-- Tab Navigation -->
         <div class="tabs">
-            <button class="tab-btn active" data-tab="explorer">Cultural Experiences</button>
-            <button class="tab-btn" data-tab="merchant">Artisan Products</button>
-            <button class="tab-btn" data-tab="weather">Weather Forecast</button>
+            <button class="tab-btn active" data-tab="explorer">സാംസ്കാരിക അനുഭവങ്ങൾ</button>
+            <button class="tab-btn" data-tab="merchant">കലാകൃതികൾ</button>
+            <button class="tab-btn" data-tab="weather">കാലാവസ്ഥ പ്രവചനം</button>
         </div>
 
         <!-- Explorer Tab Content -->
         <div class="tab-content active" id="explorer-tab">
             <div class="section-title">
-                <h2>Cultural Experiences</h2>
-                <p>Immerse yourself in authentic cultural activities and workshops</p>
+                <h2>സാംസ്കാരിക അനുഭവങ്ങൾ</h2>
+                <p>കേരളത്തിന്റെ സമ്പന്നമായ സാംസ്കാരിക പൈതൃകത്തിൽ മുഴുകുക</p>
             </div>
             
             <div class="card-grid" id="experiences-container">
@@ -471,8 +534,8 @@
         <!-- Merchant Tab Content -->
         <div class="tab-content" id="merchant-tab">
             <div class="section-title">
-                <h2>Artisan Marketplace</h2>
-                <p>Discover handcrafted products made by skilled artisans</p>
+                <h2>കലാ സാധനങ്ങൾ</h2>
+                <p>കേരളത്തിന്റെ പരമ്പരാഗത കലാകാരന്മാരുടെ കൈവേലകൾ</p>
             </div>
             
             <div class="card-grid" id="products-container">
@@ -481,8 +544,8 @@
             
             <div style="margin-top: 40px;">
                 <div class="section-title">
-                    <h2>Order History</h2>
-                    <p>Track your recent purchases</p>
+                    <h2>ഓർഡർ ചരിത്രം</h2>
+                    <p>നിങ്ങളുടെ അടുത്തിടെയുള്ള വാങ്ങലുകൾ</p>
                 </div>
                 
                 <div class="card-grid" id="orders-container">
@@ -494,31 +557,31 @@
         <!-- Weather Tab Content -->
         <div class="tab-content" id="weather-tab">
             <div class="section-title">
-                <h2>Weather Forecast</h2>
-                <p>Check the weather for your cultural adventures</p>
+                <h2>കാലാവസ്ഥ പ്രവചനം</h2>
+                <p>കേരളയാത്രയ്ക്ക് അനുയോജ്യമായ കാലാവസ്ഥ</p>
             </div>
             
             <div class="weather-widget">
                 <div class="weather-header">
-                    <h3>Current Weather</h3>
+                    <h3>നിലവിലെ കാലാവസ്ഥ</h3>
                     <div class="weather-search">
-                        <input type="text" id="city-input" placeholder="Enter city name">
-                        <button class="btn" id="search-weather">Search</button>
+                        <input type="text" id="city-input" placeholder="നഗരത്തിന്റെ പേര് നൽകുക">
+                        <button class="btn" id="search-weather">തിരയുക</button>
                     </div>
                 </div>
                 
                 <div id="current-weather-container">
-                    <div class="loading">Enter a city to see weather information</div>
+                    <div class="loading">കാലാവസ്ഥ വിവരങ്ങൾ കാണാൻ ഒരു നഗരത്തിന്റെ പേര് നൽകുക</div>
                 </div>
             </div>
             
             <div class="weather-widget">
                 <div class="weather-header">
-                    <h3>5-Day Forecast</h3>
+                    <h3>5-ദിവസ പ്രവചനം</h3>
                 </div>
                 
                 <div id="forecast-container">
-                    <div class="loading">Enter a city to see forecast</div>
+                    <div class="loading">പ്രവചനം കാണാൻ ഒരു നഗരത്തിന്റെ പേര് നൽകുക</div>
                 </div>
             </div>
         </div>
@@ -529,30 +592,30 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-column">
-                    <h3>Living Heritage</h3>
-                    <p>Connecting travelers with authentic cultural experiences and artisans worldwide.</p>
+                    <h3>കേരള Heritage</h3>
+                    <p>കേരളത്തിന്റെ സമ്പന്നമായ സാംസ്കാരിക പൈതൃകം ലോകത്തിന് മുന്നിൽ എത്തിക്കുന്നു.</p>
                 </div>
                 
                 <div class="footer-column">
-                    <h3>Quick Links</h3>
+                    <h3>ദ്രുത ലിങ്കുകൾ</h3>
                     <ul>
-                        <li><a href="#" data-tab="explorer">Cultural Experiences</a></li>
-                        <li><a href="#" data-tab="merchant">Artisan Products</a></li>
-                        <li><a href="#" data-tab="weather">Weather Forecast</a></li>
+                        <li><a href="#" data-tab="explorer">സാംസ്കാരിക അനുഭവങ്ങൾ</a></li>
+                        <li><a href="#" data-tab="merchant">കലാസാധനങ്ങൾ</a></li>
+                        <li><a href="#" data-tab="weather">കാലാവസ്ഥ പ്രവചനം</a></li>
                     </ul>
                 </div>
                 
                 <div class="footer-column">
-                    <h3>Contact Us</h3>
+                    <h3>ഞങ്ങളെ സമീപിക്കുക</h3>
                     <ul>
-                        <li>Email: info@livingheritage.com</li>
-                        <li>Phone: +1 (555) 123-4567</li>
+                        <li>ഇമെയിൽ: info@keralaheritage.com</li>
+                        <li>ഫോൺ: +91 471 2525252</li>
                     </ul>
                 </div>
             </div>
             
             <div class="copyright">
-                &copy; 2023 Living Heritage. All rights reserved.
+                &copy; 2023 കേരള Heritage. എല്ലാ അവകാശങ്ങളും നിക്ഷിപ്തം.
             </div>
         </div>
     </footer>
@@ -600,8 +663,8 @@
                     loadProducts();
                     loadOrders();
                 } else if (tabName === 'weather') {
-                    // Default weather location
-                    getWeatherByCity('Paris');
+                    // Default weather location - Thiruvananthapuram
+                    getWeatherByCity('Thiruvananthapuram');
                 }
             }
             
@@ -640,8 +703,45 @@
                 container.innerHTML = '<div class="loading">Loading experiences...</div>';
                 
                 try {
-                    const response = await fetch('/api/explorer/experiences');
-                    const experiences = await response.json();
+                    // Simulate API call with Kerala-specific experiences
+                    const experiences = [
+                        {
+                            id: 1,
+                            title: "Kathakali Performance Workshop",
+                            description: "Learn the basics of Kathakali, the classical dance-drama of Kerala, from renowned artists.",
+                            price: "₹1,500"
+                        },
+                        {
+                            id: 2,
+                            title: "Traditional Kerala Cooking Class",
+                            description: "Master the art of authentic Kerala cuisine with a local family in their home.",
+                            price: "₹2,000"
+                        },
+                        {
+                            id: 3,
+                            title: "Backwater Houseboat Cruise",
+                            description: "Experience the serene backwaters of Alleppey on a traditional Kettuvallam.",
+                            price: "₹5,000"
+                        },
+                        {
+                            id: 4,
+                            title: "Ayurvedic Wellness Retreat",
+                            description: "Rejuvenate with traditional Ayurvedic treatments in a peaceful setting.",
+                            price: "₹4,500"
+                        },
+                        {
+                            id: 5,
+                            title: "Theyyam Ritual Experience",
+                            description: "Witness the sacred ritual dance of Northern Kerala with local explanations.",
+                            price: "₹1,200"
+                        },
+                        {
+                            id: 6,
+                            title: "Coir Making Demonstration",
+                            description: "Learn about the traditional process of coir making from coconut husks.",
+                            price: "₹800"
+                        }
+                    ];
                     
                     if (experiences.length > 0) {
                         container.innerHTML = '';
@@ -662,10 +762,14 @@
                 const card = document.createElement('div');
                 card.className = 'card';
                 
-                // Using placeholder images based on experience type
-                const imageUrl = experience.title.includes('Pottery') 
-                    ? 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
-                    : 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80';
+                // Using Kerala-themed images
+                const imageUrl = experience.title.includes('Kathakali') 
+                    ? 'https://images.unsplash.com/photo-1588416499018-d8c621b1b3cf?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+                    : experience.title.includes('Cooking')
+                    ? 'https://images.unsplash.com/photo-1585937421610-8da9a6c6d3e7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+                    : experience.title.includes('Houseboat')
+                    ? 'https://images.unsplash.com/photo-1588416499018-d8c621b1b3cf?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+                    : 'https://images.unsplash.com/photo-1585937421610-8da9a6c6d3e7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80';
                 
                 card.innerHTML = `
                     <div class="card-img">
@@ -674,7 +778,7 @@
                     <div class="card-content">
                         <h3>${experience.title}</h3>
                         <p>${experience.description}</p>
-                        <div class="card-price">$${experience.price} per person</div>
+                        <div class="card-price">${experience.price} per person</div>
                         <button class="btn">Book Now</button>
                     </div>
                 `;
@@ -687,12 +791,49 @@
                 container.innerHTML = '<div class="loading">Loading products...</div>';
                 
                 try {
-                    const response = await fetch('/api/merchant/products');
-                    const data = await response.json();
+                    // Simulate API call with Kerala-specific products
+                    const products = [
+                        {
+                            id: 1,
+                            name: "Kathakali Mask",
+                            category: "crafts",
+                            price: "₹2,500"
+                        },
+                        {
+                            id: 2,
+                            name: "Kerala Kasavu Saree",
+                            category: "textiles",
+                            price: "₹5,800"
+                        },
+                        {
+                            id: 3,
+                            name: "Coir Handicrafts",
+                            category: "crafts",
+                            price: "₹1,200"
+                        },
+                        {
+                            id: 4,
+                            name: "Traditional Uruli",
+                            category: "metalwork",
+                            price: "₹3,500"
+                        },
+                        {
+                            id: 5,
+                            name: "Aranmula Kannadi",
+                            category: "metalwork",
+                            price: "₹4,200"
+                        },
+                        {
+                            id: 6,
+                            name: "Spices Gift Box",
+                            category: "food",
+                            price: "₹1,800"
+                        }
+                    ];
                     
-                    if (data.success && data.products.length > 0) {
+                    if (products.length > 0) {
                         container.innerHTML = '';
-                        data.products.forEach(product => {
+                        products.forEach(product => {
                             const card = createProductCard(product);
                             container.appendChild(card);
                         });
@@ -709,10 +850,12 @@
                 const card = document.createElement('div');
                 card.className = 'card';
                 
-                // Using placeholder images based on product category
-                const imageUrl = product.category === 'crafts' 
-                    ? 'https://images.unsplash.com/photo-1577985051164-55a7bf6c2c2a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
-                    : 'https://images.unsplash.com/photo-1590661080496-54e229e2b4c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80';
+                // Using Kerala-themed images
+                const imageUrl = product.name.includes('Mask') 
+                    ? 'https://images.unsplash.com/photo-1611655336715-5ce4f5a5b1be?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+                    : product.name.includes('Saree')
+                    ? 'https://images.unsplash.com/photo-1588416499018-d8c621b1b3cf?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+                    : 'https://images.unsplash.com/photo-1585937421610-8da9a6c6d3e7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80';
                 
                 card.innerHTML = `
                     <div class="card-img">
@@ -721,7 +864,7 @@
                     <div class="card-content">
                         <h3>${product.name}</h3>
                         <p>Handcrafted ${product.category}</p>
-                        <div class="card-price">$${product.price}</div>
+                        <div class="card-price">${product.price}</div>
                         <button class="btn">Add to Cart</button>
                     </div>
                 `;
@@ -734,12 +877,23 @@
                 container.innerHTML = '<div class="loading">Loading orders...</div>';
                 
                 try {
-                    const response = await fetch('/api/merchant/orders');
-                    const data = await response.json();
+                    // Simulate API call with sample orders
+                    const orders = [
+                        {
+                            id: "KL1234",
+                            product: "Kasavu Saree",
+                            status: "completed"
+                        },
+                        {
+                            id: "KL5678",
+                            product: "Spices Box",
+                            status: "shipped"
+                        }
+                    ];
                     
-                    if (data.success && data.orders.length > 0) {
+                    if (orders.length > 0) {
                         container.innerHTML = '';
-                        data.orders.forEach(order => {
+                        orders.forEach(order => {
                             const card = createOrderCard(order);
                             container.appendChild(card);
                         });
@@ -776,25 +930,29 @@
                 forecastContainer.innerHTML = '<div class="loading">Loading forecast...</div>';
                 
                 try {
-                    // Get current weather
-                    const currentResponse = await fetch(`/api/weather/current?city=${encodeURIComponent(city)}`);
-                    const currentData = await currentResponse.json();
+                    // Simulate weather API response for Kerala cities
+                    const weatherData = {
+                        temperature: 28,
+                        feelsLike: 32,
+                        humidity: 80,
+                        windSpeed: 3.5,
+                        description: "partly cloudy",
+                        city: city,
+                        country: "India"
+                    };
                     
-                    if (currentResponse.ok) {
-                        currentContainer.innerHTML = createCurrentWeatherHTML(currentData);
-                    } else {
-                        currentContainer.innerHTML = `<div class="error">${currentData.message}</div>`;
-                    }
+                    currentContainer.innerHTML = createCurrentWeatherHTML(weatherData);
                     
-                    // Get forecast
-                    const forecastResponse = await fetch(`/api/weather/forecast?city=${encodeURIComponent(city)}&days=5`);
-                    const forecastData = await forecastResponse.json();
+                    // Simulate forecast data
+                    const forecastData = [
+                        { date: new Date(Date.now() + 86400000), temperature: 29, description: "Sunny" },
+                        { date: new Date(Date.now() + 172800000), temperature: 28, description: "Partly cloudy" },
+                        { date: new Date(Date.now() + 259200000), temperature: 27, description: "Light rain" },
+                        { date: new Date(Date.now() + 345600000), temperature: 28, description: "Cloudy" },
+                        { date: new Date(Date.now() + 432000000), temperature: 29, description: "Sunny" }
+                    ];
                     
-                    if (forecastResponse.ok) {
-                        forecastContainer.innerHTML = createForecastHTML(forecastData);
-                    } else {
-                        forecastContainer.innerHTML = `<div class="error">${forecastData.message}</div>`;
-                    }
+                    forecastContainer.innerHTML = createForecastHTML(forecastData);
                 } catch (error) {
                     console.error('Error loading weather:', error);
                     currentContainer.innerHTML = '<div class="error">Failed to load weather data</div>';
