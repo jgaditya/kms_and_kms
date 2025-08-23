@@ -10,7 +10,7 @@
     --gradient-hero: linear-gradient(135deg, rgba(42, 157, 143, 0.85) 0%, rgba(38, 70, 83, 0.85) 100%);
     --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     --shadow-hover: 0 15px 40px rgba(0, 0, 0, 0.2);
-    --border-radius: 16px;
+    --border-radius: 12px;
     --transition: all 0.3s ease;
 }
 
@@ -31,13 +31,14 @@ body {
     justify-content: center;
     align-items: center;
     overflow: hidden;
+    padding: 20px;
 }
 
-.login-container {
+.signup-container {
     display: flex;
     width: 90%;
-    max-width: 1000px;
-    min-height: 550px;
+    max-width: 950px;
+    height: 550px;
     background: white;
     border-radius: var(--border-radius);
     overflow: hidden;
@@ -45,35 +46,36 @@ body {
     z-index: 10;
 }
 
-.login-left {
+.signup-left {
     flex: 1;
     position: relative;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 40px;
+    padding: 30px;
     background: var(--gradient-primary);
     color: white;
 }
 
-.login-right {
-    flex: 1;
-    padding: 40px;
+.signup-right {
+    flex: 1.2;
+    padding: 30px;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    overflow-y: auto;
 }
 
 .logo {
     font-family: 'Playfair Display', serif;
-    font-size: 32px;
+    font-size: 28px;
     color: white;
     text-decoration: none;
     display: flex;
     align-items: center;
     font-weight: 700;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 }
 
 .logo span {
@@ -83,41 +85,44 @@ body {
 
 .welcome-text {
     text-align: center;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 }
 
 .welcome-text h1 {
-    font-size: 28px;
-    margin-bottom: 15px;
+    font-size: 24px;
+    margin-bottom: 10px;
     color: white;
 }
 
 .welcome-text p {
     opacity: 0.9;
+    font-size: 14px;
 }
 
-.login-features {
-    margin-top: 30px;
+.signup-features {
+    margin-top: 20px;
 }
 
 .feature {
     display: flex;
     align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
+    font-size: 13px;
 }
 
 .feature-icon {
-    width: 40px;
-    height: 40px;
+    width: 32px;
+    height: 32px;
     background: rgba(255, 255, 255, 0.2);
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-right: 15px;
+    margin-right: 12px;
+    font-size: 14px;
 }
 
-.login-form {
+.signup-form {
     width: 100%;
     max-width: 400px;
     margin: 0 auto;
@@ -125,24 +130,37 @@ body {
 
 .form-title {
     text-align: center;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 }
 
 .form-title h2 {
-    font-size: 28px;
+    font-size: 24px;
     color: var(--dark);
-    margin-bottom: 10px;
+    margin-bottom: 8px;
+}
+
+.form-title p {
+    font-size: 14px;
+    color: #666;
+}
+
+.form-row {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 15px;
 }
 
 .form-group {
-    margin-bottom: 20px;
+    margin-bottom: 15px;
+    flex: 1;
 }
 
 .form-group label {
     display: block;
-    margin-bottom: 8px;
+    margin-bottom: 6px;
     font-weight: 500;
     color: var(--dark);
+    font-size: 13px;
 }
 
 .input-with-icon {
@@ -151,19 +169,21 @@ body {
 
 .input-with-icon i {
     position: absolute;
-    left: 15px;
+    left: 12px;
     top: 50%;
     transform: translateY(-50%);
     color: #aaa;
+    font-size: 14px;
 }
 
 .input-with-icon input {
     width: 100%;
-    padding: 15px 15px 15px 45px;
+    padding: 12px 12px 12px 38px;
     border: 2px solid #e9ecef;
     border-radius: var(--border-radius);
     font-family: 'Poppins', sans-serif;
     transition: var(--transition);
+    font-size: 14px;
 }
 
 .input-with-icon input:focus {
@@ -172,37 +192,31 @@ body {
     box-shadow: 0 0 0 3px rgba(42, 157, 143, 0.2);
 }
 
-.remember-forgot {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-    font-size: 14px;
-}
-
-.remember {
+.checkbox-terms {
     display: flex;
     align-items: center;
+    font-size: 13px;
+    margin: 15px 0;
 }
 
-.remember input {
+.checkbox-terms input {
     margin-right: 8px;
 }
 
-.forgot-password {
+.checkbox-terms a {
     color: var(--primary);
     text-decoration: none;
     transition: var(--transition);
 }
 
-.forgot-password:hover {
+.checkbox-terms a:hover {
     color: var(--accent);
 }
 
 .btn {
     display: block;
     width: 100%;
-    padding: 15px;
+    padding: 12px;
     background: var(--gradient-accent);
     color: white;
     text-decoration: none;
@@ -215,6 +229,7 @@ body {
     text-transform: uppercase;
     letter-spacing: 1px;
     text-align: center;
+    font-size: 14px;
 }
 
 .btn:hover {
@@ -222,19 +237,20 @@ body {
     box-shadow: var(--shadow-hover);
 }
 
-.social-login {
-    margin-top: 25px;
+.social-signup {
+    margin-top: 20px;
     text-align: center;
 }
 
-.social-login p {
-    margin-bottom: 15px;
+.social-signup p {
+    margin-bottom: 12px;
     color: #666;
     position: relative;
+    font-size: 13px;
 }
 
-.social-login p::before,
-.social-login p::after {
+.social-signup p::before,
+.social-signup p::after {
     content: "";
     position: absolute;
     top: 50%;
@@ -243,23 +259,23 @@ body {
     background: #e9ecef;
 }
 
-.social-login p::before {
+.social-signup p::before {
     left: 0;
 }
 
-.social-login p::after {
+.social-signup p::after {
     right: 0;
 }
 
 .social-icons {
     display: flex;
     justify-content: center;
-    gap: 15px;
+    gap: 12px;
 }
 
 .social-icon {
-    width: 45px;
-    height: 45px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     display: flex;
     justify-content: center;
@@ -276,20 +292,20 @@ body {
     color: white;
 }
 
-.register-link {
+.login-link {
     text-align: center;
-    margin-top: 25px;
-    font-size: 14px;
+    margin-top: 20px;
+    font-size: 13px;
 }
 
-.register-link a {
+.login-link a {
     color: var(--primary);
     text-decoration: none;
     font-weight: 600;
     transition: var(--transition);
 }
 
-.register-link a:hover {
+.login-link a:hover {
     color: var(--accent);
 }
 
@@ -327,20 +343,80 @@ body {
     background: var(--gradient-hero);
 }
 
+.password-strength {
+    margin-top: 6px;
+    height: 4px;
+    background: #eee;
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.strength-meter {
+    height: 100%;
+    width: 0;
+    transition: width 0.3s ease;
+}
+
+.strength-weak {
+    background: #e74c3c;
+}
+
+.strength-medium {
+    background: #f39c12;
+}
+
+.strength-strong {
+    background: #2ecc71;
+}
+
+.strength-text {
+    font-size: 11px;
+    margin-top: 4px;
+    color: #666;
+}
+
+.error-message {
+    color: #e74c3c;
+    font-size: 11px;
+    margin-top: 4px;
+}
+
+.success-message {
+    background: #d4edda;
+    color: #155724;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    text-align: center;
+    font-size: 13px;
+}
+
 /* Responsive styles */
+@media (max-width: 992px) {
+    .form-row {
+        flex-direction: column;
+        gap: 0;
+    }
+}
+
 @media (max-width: 768px) {
-    .login-container {
+    .signup-container {
         flex-direction: column;
         width: 95%;
         max-width: 400px;
+        height: auto;
     }
     
-    .login-left {
-        padding: 30px 20px;
-        display: none; /* Hide left panel on mobile */
+    .signup-left {
+        padding: 25px 15px;
+        display: none;
     }
     
-    .login-right {
-        padding: 30px 20px;
+    .signup-right {
+        padding: 25px 20px;
+    }
+    
+    .welcome-text h1 {
+        font-size: 22px;
     }
 }
