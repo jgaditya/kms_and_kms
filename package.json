@@ -9,12 +9,13 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "axios": "^1.5.0",
+    "axios": "^1.11.0",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "dotenv": "^16.6.1",
     "express": "^4.21.2",
     "jsonwebtoken": "^9.0.2",
+    "mongodb": "^6.18.0",
     "mongoose": "^7.8.7"
   },
   "devDependencies": {
@@ -27,5 +28,13 @@
     "experiences"
   ],
   "author": "Your Name",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jgaditya/kms_and_kms.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jgaditya/kms_and_kms/issues"
+  },
+  "homepage": "https://github.com/jgaditya/kms_and_kms#readme"
 }

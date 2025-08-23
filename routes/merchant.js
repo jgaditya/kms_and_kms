@@ -11,7 +11,7 @@ router.get('/products', (req, res) => {
       { id: 2, name: 'Traditional Shawl', price: 45, category: 'textiles' }
     ]
   });
-});n
+});
 
 // GET /api/merchant/orders
 router.get('/orders', (req, res) => {

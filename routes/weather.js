@@ -1,142 +1,63 @@
-const express = require('express');
-const router = express.Router();
-const axios = require('axios');
+const express = require("express");
+const axios = require("axios");
+const mongoose = require("mongoose");
 
-// GET /api/weather/current - Get current weather
-router.get('/current', async (req, res) => {
-  try {
-    const { city, lat, lon } = req.query;
-    
-    if (!city && (!lat || !lon)) {
-      return res.status(400).json({ 
-        message: 'Please provide city or coordinates' 
-      });
-    }
-    
-    // Build parameters for OpenWeatherMap API
-    const params = {
-      appid: process.env.OPENWEATHER_API_KEY,
-      units: 'metric'
-    };
-    
-    if (city) {
-      params.q = city;
-    } else {
-      params.lat = lat;
-      params.lon = lon;
-    }
-    
-    // Make request to OpenWeatherMap API
-    const response = await axios.get(
-      'https://api.openweathermap.org/data/2.5/weather', 
-      { params, timeout: 10000 }
-    );
-    
-    // Format the response
-    res.json({
-      temperature: response.data.main.temp,
-      feelsLike: response.data.main.feels_like,
-      description: response.data.weather[0].description,
-      humidity: response.data.main.humidity,
-      windSpeed: response.data.wind.speed,
-      icon: response.data.weather[0].icon,
-      city: response.data.name,
-      country: response.data.sys.country
-    });
-    
-  } catch (error) {
-    console.error('Weather API error:', error);
-    
-    if (error.response) {
-      // OpenWeatherMap API error
-      res.status(502).json({ 
-        message: 'Weather service unavailable',
-        error: error.response.data 
-      });
-    } else if (error.request) {
-      // Network error
-      res.status(503).json({ 
-        message: 'Cannot connect to weather service' 
-      });
-    } else {
-      // Other error
-      res.status(500).json({ 
-        message: 'Internal server error' 
-      });
-    }
-  }
+const router = express.Router();
+
+// Weather schema
+const weatherSchema = new mongoose.Schema({
+  city: String,
+  temp: Number,
+  feels_like: Number,
+  humidity: Number,
+  wind: Number,
+  condition: String,
+  date: { type: Date, default: Date.now }
 });
 
-// GET /api/weather/forecast - Get weather forecast
-router.get('/forecast', async (req, res) => {
+const Weather = mongoose.models.Weather || mongoose.model("Weather", weatherSchema);
+
+// GET /api/weather/:city
+router.get("/:city", async (req, res) => {
+  const city = req.params.city;
+
   try {
-    const { city, lat, lon, days = 5 } = req.query;
-    
-    if (!city && (!lat || !lon)) {
-      return res.status(400).json({ 
-        message: 'Please provide city or coordinates' 
-      });
-    }
-    
-    // Build parameters for OpenWeatherMap API
-    const params = {
-      appid: process.env.OPENWEATHER_API_KEY,
-      units: 'metric',
-      cnt: days * 8 // OpenWeatherMap returns data in 3-hour intervals
-    };
-    
-    if (city) {
-      params.q = city;
-    } else {
-      params.lat = lat;
-      params.lon = lon;
-    }
-    
-    // Make request to OpenWeatherMap API
-    const response = await axios.get(
-      'https://api.openweathermap.org/data/2.5/forecast', 
-      { params, timeout: 10000 }
-    );
-    
-    // Format the response to daily forecasts
-    const dailyForecasts = [];
-    const processedDays = new Set();
-    
-    response.data.list.forEach(item => {
-      const date = item.dt_txt.split(' ')[0]; // Get just the date part
-      
-      if (!processedDays.has(date)) {
-        processedDays.add(date);
-        dailyForecasts.push({
-          date: date,
-          temperature: item.main.temp,
-          description: item.weather[0].description,
-          humidity: item.main.humidity,
-          icon: item.weather[0].icon
-        });
-      }
+    // Check if already stored in DB today
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    const existing = await Weather.findOne({
+      city: city,
+      date: { $gte: today }
     });
-    
-    // Return only the requested number of days
-    res.json(dailyForecasts.slice(0, days));
-    
-  } catch (error) {
-    console.error('Weather forecast error:', error);
-    
-    if (error.response) {
-      res.status(502).json({ 
-        message: 'Weather service unavailable',
-        error: error.response.data 
-      });
-    } else if (error.request) {
-      res.status(503).json({ 
-        message: 'Cannot connect to weather service' 
-      });
-    } else {
-      res.status(500).json({ 
-        message: 'Internal server error' 
-      });
+
+    if (existing) {
+      return res.json({ success: true, data: existing, source: "db" });
     }
+
+    // Fetch from OpenWeatherMap (⚠️ Fixed template literal here)
+    const response = await axios.get(
+      `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${process.env.WEATHER_KEY}&units=metric`
+    );
+
+    const data = {
+      city: city,
+      temp: response.data.main.temp,
+      feels_like: response.data.main.feels_like,
+      humidity: response.data.main.humidity,
+      wind: response.data.wind.speed,
+      condition: response.data.weather[0].description
+    };
+
+    // Save in DB
+    const newWeather = new Weather(data);
+    await newWeather.save();
+
+    res.json({ success: true, data: newWeather, source: "api" });
+
+  } catch (error) {
+    console.error("Weather error:", error.message);
+    res.status(500).json({ success: false, error: "Failed to fetch weather" });
   }
 });
 
