@@ -36,31 +36,6 @@ h1, h2, h3, h4 {
     padding: 0 20px;
 }
 
-/* Kathakali Mask Decoration */
-.kathakali-mask {
-    position: absolute;
-    width: 120px;
-    height: 120px;
-    opacity: 0.1;
-    pointer-events: none;
-}
-
-.mask-1 {
-    top: 20px;
-    left: 5%;
-    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path fill="%23d4af37" d="M50,10 C70,10 85,30 85,55 C85,80 70,90 50,90 C30,90 15,80 15,55 C15,30 30,10 50,10 Z M40,40 C35,40 30,45 30,50 C30,55 35,60 40,60 C45,60 50,55 50,50 C50,45 45,40 40,40 Z M60,40 C55,40 50,45 50,50 C50,55 55,60 60,60 C65,60 70,55 70,50 C70,45 65,40 60,40 Z"/></svg>');
-    background-size: contain;
-    background-repeat: no-repeat;
-}
-
-.mask-2 {
-    bottom: 20px;
-    right: 5%;
-    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path fill="%23c44b27" d="M50,10 C70,10 85,30 85,55 C85,80 70,90 50,90 C30,90 15,80 15,55 C15,30 30,10 50,10 Z M40,40 C35,40 30,45 30,50 C30,55 35,60 40,60 C45,60 50,55 50,50 C50,45 45,40 40,40 Z M60,40 C55,40 50,45 50,50 C50,55 55,60 60,60 C65,60 70,55 70,50 C70,45 65,40 60,40 Z"/></svg>');
-    background-size: contain;
-    background-repeat: no-repeat;
-}
-
 /* Malayalam Text Style */
 .malayalam-text {
     font-family: 'Noto Sans Malayalam', 'Poppins', sans-serif;
